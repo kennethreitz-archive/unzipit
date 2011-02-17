@@ -3,30 +3,21 @@
 import plac
 from os import system
 
+from unzipit import formats
+
+
 @plac.annotations(fname='path to archive')
 def main(fname, *test):
+    ext = fname.split('.', 1)[1]
 
-    exts = fname.split('.')[1:]
-
-    flags = ['x']
-
-    if len(exts):
-        if 'bz' in exts:
-            flags.append('j')
-        elif 'gz' in exts:
-            flags.append('z')
-        elif 'xz' in exts:
-            flags.append('J')
-
-        print 'tar -%s %s' % (''.join(flags), fname)
-
+    if ext in formats.exts:
+        for i, cmd in enumerate(formats.exts[ext]):
+            fname = fname.rsplit('.', i)[0]
+            print '%s %s' % (cmd, fname)
+            #system('%s %s' % (cmd, fname))
     else:
         print('Archive must have a recognizable extension.')
 
-
-
-
-    # system('tar %s %s' % (flags, fname))
 
 def run():
     plac.call(main)
