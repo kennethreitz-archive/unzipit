@@ -25,9 +25,7 @@ setup(
     author='Kenneth Reitz',
     author_email='me@kennethreitz.com',
     url='https://github.com/kennethreitz/unzipit',
-    packages= [
-        'unzipit'
-    ],
+    packages= ['unzipit'],
     install_requires=required,
     license='ISC',
     classifiers=(
